@@ -1,0 +1,125 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1;" />
+<meta name="keywords" content="esoteric programming, Ook, Ook#, Ook!, Brainf*ck, .NET, Mono, mod_wiki, wiki, openwiki, ASP, IIS, XML, XHTML, RSS, dotnet"/>
+<meta name="description" content="BlueSorcerer.Net"/>
+<meta name="ROBOTS" content="INDEX,FOLLOW"/>
+<meta name="MSSmartTagsPreventParsing" content="true"/>
+<title>BlueSorcerer.Net - Brainf*ck .Net Compiler -  Esoteric Programming Languages</title>
+<link rel="stylesheet" type="text/css" href="../style.css" />
+</head>
+<body>
+<h2><u>Brainf*ck .NET Compiler</u></h2>
+
+<h3>Overview</h3>
+
+The <a href="http://www.catseye.mb.ca/esoteric/bf/">Brainf*ck</a> 
+programming language has only eight commands and is a creation 
+of Urban Müller who originally wrote it for the Amiga. It has
+been proven that Brainf*ck is 
+<a href="http://home.wxs.nl/~faase009/Ha_bf_Turing.html">Turing complete</a>.
+
+<p />
+
+The goal here was to create a Brainf*ck compiler that outputs 
+<a href="http://www.ecma.ch/ecma1/STAND/ecma-335.htm">.NET IL code</a>.
+The result is <a href="bf.zip">Brainf*ck .NET Compiler v1.0</a>. This is
+probably the simplest .NET compiler around.
+
+<h3>Download</h3>
+
+The Brainf*ck .NET Compiler is released under the 
+<a href="LICENSE.txt">BSD</a> license, and is available for download:
+<p />
+<ul><li>Brainf*ck .NET Compiler v1.0 (<a href="bf.zip">zip</a> | <a href="bf.tar.gz">tar</a>)</li></ul>
+
+<h3>Sample programs</h3>
+
+<li><a href="hello.b">hello.b</a> : the obligatory Hello World! example</li>
+<li><a href="cat.b">cat.b</a> : reads in a file and prints it out</li>
+<li><a href="rev.b">rev.b</a> : reads in a file and prints it out in reversed order</li>
+<li><a href="http://esoteric.sange.fi/brainfuck/bf-source/src-bf/prime.b">prime.b</a> : prints prime numbers</li>
+<li><a href="http://www.people.fas.harvard.edu/~jafowler/pi/pi.b">pi.b</a> : prints the number Pi</li>
+<li><a href="http://esoteric.sange.fi/brainfuck/bf-source/prog/fib.b">fib.b</a> : prints the Fibonacci numbers</li>
+<li><a href="http://esoteric.sange.fi/brainfuck/bf-source/quine/quine-bock.b">quine.b</a> : prints itself</li>
+<li><a href="http://esoteric.sange.fi/brainfuck/bf-source/prog/rot13.b">rot13.b</a> : rot13 encoder</li>
+<li><a href="bf2ook.b">bf2ook.b</a> : Brainf*ck to Ook# converter</li>
+
+<p />
+
+More sources can be found at <a href="http://esoteric.sange.fi/brainfuck/">http://esoteric.sange.fi/brainfuck/</a>.
+
+<h3>Language Specification</h3>
+
+A brainf*ck program uses a data structure that is an array of integer values, 
+initially all set to zero. It also has a pointer which initially points to the 
+beginning of the array. It has eight instructions, each represented as a single 
+character, which are described below:
+
+<blockquote>
+>  &nbsp; Increment the pointer <br />
+<  &nbsp; Decrement the pointer <br />
++  &nbsp; Increment the value at the pointer <br />
+-  &nbsp; Decrement the value at the pointer <br />
+.  &nbsp; Write the value at the pointer to standard output <br />
+,  &nbsp; Read a value from standard input and store it at the pointer <br />
+[  &nbsp; If the value at the pointer is zero, jump past the matching ] <br />
+]  &nbsp; Jump to the matching [
+</blockquote>
+
+
+
+<h3>Mono</h3>
+
+<p />
+The compiler sources have been compiled with csc from ms.net and with 
+mcs from <a href="http://www.go-mono.org">Mono</a>.
+<p />
+The compilers and the output of these compilers have been tested under 
+ms.net on a win32 system and should also work under Mono using Linux. 
+<p />
+
+When executing the Brainf*ck program
+<a href="http://esoteric.sange.fi/brainfuck/bf-source/src-bf/prime.b">prime.b</a> 
+(or the Ook# equivalant <a href="prime.ook">prime.ook</a>) 
+the execution times 
+on the same machine using the same OS for primes up to 200 are on average as 
+follows (per May 26th 2002) :
+
+<ul>
+  <li> ms.net : 9 seconds.</li>
+  <li> mono : 30 seconds.</li>
+  <li> mint : 2150 seconds.</li>
+</ul>
+
+Memory usage always stays the same for all environments, about 30KB.
+
+<p />
+
+I have not yet optimized the compilers as at first I'd like to rely
+on the JIT compilation features of the .NET runtime. Therefor the 
+output of these compilers serve as nice tests for the JIT compiler 
+of Mono. Another nice test program is 
+<a href="http://www.people.fas.harvard.edu/~jafowler/pi/pi.b">pi.b</a>
+which calculates the number Pi.
+
+<p />
+
+Interestingly enough, when the prime.b program is compiled in pure C
+(see <a href="prime.c">prime.c</a> which was created by compiling 
+<a href="bf.c">bf.c</a> and then running it with the <a href="prime.b">prime.b</a>
+program), and run on the same machine it takes <u>20 seconds</u> 
+to compute the primes up to 200. This shows one case where JIT 
+compilation can outperform good-old-fashioned C.
+
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr bgcolor="#ffffff"><td><img src="../1x1.gif" width="1" height="40" alt="" /></td></tr>
+<tr bgcolor="#999999"><td><img src="../1x1.gif" width="1" height="3" alt="" /></td></tr>
+<tr bgcolor="#ffffff"><td><img src="../1x1.gif" width="1" height="5" alt="" /></td></tr>
+</table>
+&#0169; 2010 BlueSorcerer.Net
+<br />
+<a href="mailto:lawrence.pit@gmail.com" class="mailto">mailto: Lawrence Pit</a>
+</td></tr></table>
+
+</body>
+</html>
